@@ -1,0 +1,38 @@
+# Core Data Processing
+pandas>=2.1.0
+numpy>=1.24.0
+requests>=2.31.0
+
+# Visualization Libraries
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+folium>=0.14.0
+
+# Geospatial Analysis
+geopandas>=0.13.0
+shapely>=2.0.0
+
+# Data Storage and Formats
+pyarrow>=12.0.0  # For Parquet files
+openpyxl>=3.1.0  # For Excel files
+
+# Configuration and Environment
+python-dotenv>=1.0.0
+
+# Development and Code Quality
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.4.0
+
+# Optional: Database connectivity (if extending to use databases)
+# sqlalchemy>=2.0.0
+# psycopg2-binary>=2.9.0
+
+# Optional: API Framework (if building web API)
+# fastapi>=0.100.0
+# uvicorn>=0.22.0
+
+# Optional: Task Queue (if adding background processing)
+# celery>=5.3.0
+# redis>=4.6.0
