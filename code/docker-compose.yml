@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  noise-analytics:
+    build: .
+    container_name: nyc-noise-analytics
+    environment:
+      - LOG_LEVEL=INFO
+      - NYC_OPEN_DATA_TOKEN=${NYC_OPEN_DATA_TOKEN}
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - analytics-network
+    depends_on:
+      - redis
+  
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: noise-analytics-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - analytics-network
+    command: redis-server --appendonly yes
+  
+  # PostgreSQL for persistent storage (optional)
+  postgres:
+    image: postgres:15
+    container_name: noise-analytics-db
+    environment:
+      POSTGRES_DB: noise_analytics
+      POSTGRES_USER: analytics_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-analytics_pass}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - analytics-network
+  
+  # Nginx for serving static files (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: noise-analytics-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./outputs/visualizations:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+    networks:
+      - analytics-network
+    depends_on:
+      - noise-analytics
+
+networks:
+  analytics-network:
+    driver: bridge
+
+volumes:
+  redis_data:
+  postgres_data:
