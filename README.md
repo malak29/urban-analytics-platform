@@ -2,6 +2,10 @@
 
 A modern data visualization platform for urban and educational analytics, featuring interactive dashboards for noise complaint analysis and higher education metrics.
 
+### Higher Education Dashboard
+
+**Link**: [Higher Education Dashboard](https://public.tableau.com/views/HigheredDashboard/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
 ## Architecture Overview
 
 ```mermaid
@@ -180,9 +184,6 @@ NEXTAUTH_URL=http://localhost:3000
 - Helicopter noise shows specific time-based patterns
 - Clear weekly patterns with consistent complaint volumes Monday-Sunday
 
-### Higher Education Dashboard
-
-**Link**: [Higher Education Dashboard](https://public.tableau.com/views/HigheredDashboard/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 #### Data Variables Selected
 - Institution details (name, location, type)
